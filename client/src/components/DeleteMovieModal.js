@@ -6,7 +6,7 @@ const DeleteMovieModal = () => {
             <div className="modal-content">
                 <form>
                     <div className="modal-header">						
-                        <h4 className="modal-title">Delete Employee</h4>
+                        <h4 className="modal-title">Delete Movies</h4>
                         <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div className="modal-body">					
