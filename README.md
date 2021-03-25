@@ -59,9 +59,9 @@ CRUD applications are the foundation of most web applications. Being able to man
 
 - [x] You will once again need to keep the server and state data in sync. In `App.js`, complete the `deleteMovie` method so that it receives an id, filters out any movie with that id and sets state to that resultant movie list.
 
-- [ ] Pass `deleteMovie` into the approprate component.
+- [x] Pass `deleteMovie` into the approprate component.
 
-- [ ] Run `deleteMovie` on the currently selected movie when your delete request is complete and redirect the user to the `/movies` route.
+- [x] Run `deleteMovie` on the currently selected movie when your delete request is complete and redirect the user to the `/movies` route.
 
 #### Adding a Movie
 
