@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import Axios from 'axios'
+import React, {useState, useEffect} from 'react'
+import {Link, useHistory} from 'react-router-dom'
 
 const initFormVals={
     title:"",
@@ -9,11 +10,33 @@ const initFormVals={
     description: ""
 }
 
-export default function AddMovieForm() {
+export default function AddMovieForm(props) {
     const [formValues, setFormValues] = useState(initFormVals) 
+    const history = useHistory();
     
     const handleChange = (e) => {
     setFormValues({...formValues, [e.target.name]:e.target.value})
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formValues)
+        const newMovie = {
+            id: new Date(),
+        title:formValues.title,
+        director: formValues.director,
+        genre: formValues.genre,
+        metascore: formValues.metascore,
+        description: formValues.description
+        }
+        Axios.post('http://localhost:5000/api/movies', newMovie)
+        .then((resp)=>{
+            props.getMovies();
+            history.push('/movies')
+        })
+        .catch((err)=>{
+            console.log("error", err.response)
+        })
     }
 
 
@@ -23,8 +46,7 @@ export default function AddMovieForm() {
 		<div className="modal-content">
 			<form>
 				<div className="modal-header">						
-					<h4 className="modal-title">Editing <strong>
-                        {/* {movie.title} */} Replace Movie Title
+					<h4 className="modal-title">Add A New Movie <strong>
                         </strong></h4>
 				</div>
 				<div className="modal-body">					
@@ -51,8 +73,8 @@ export default function AddMovieForm() {
 									
 				</div>
 				<div className="modal-footer">			    
-					<input type="submit" className="btn btn-info" value="Save"/>
-					<Link to={`/movies/1`}><input type="button" className="btn btn-default" value="Cancel"/></Link>
+					<input onClick={handleSubmit}type="submit" className="btn btn-info" value="Add"/>
+					<Link to={`/movies`}><input type="button" className="btn btn-default" value="Cancel"/></Link>
 				</div>
 			</form>
 		</div>
